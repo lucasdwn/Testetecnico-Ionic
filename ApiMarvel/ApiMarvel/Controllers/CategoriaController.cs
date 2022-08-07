@@ -34,10 +34,14 @@ namespace ApiMarvel.Controllers
         {
             var categoria =  await _context.Categorias.FirstOrDefaultAsync(p => p.Id == id);
 
+
             if (categoria == null)
             {
                 return NotFound("Categoria não encontrada...");
             }
+
+            await _context.Categorias.Include(p => p.Personagens).ToListAsync();
+
             return Ok(categoria);
         }
 
@@ -63,7 +67,7 @@ namespace ApiMarvel.Controllers
                 return BadRequest();
             }
 
-            _context.Update(categoria);
+             _context.Update(categoria);
             await _context.SaveChangesAsync();
             return Ok(categoria);
         }
