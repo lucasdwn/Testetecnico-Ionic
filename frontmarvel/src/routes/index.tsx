@@ -3,12 +3,13 @@ import {
     Route, 
     Routes,
 } from "react-router-dom";
+import { Categorias } from "../pages/categorias";
 
 export function AppRoutes() {
     return(
         <Router>
             <Routes>
-                <Route path="/" element={<h1>Hello World</h1>}/>
+                <Route path="/" element={<Categorias/>}/>
             </Routes>
         </Router>
     )
