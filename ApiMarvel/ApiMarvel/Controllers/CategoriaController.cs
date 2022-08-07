@@ -18,21 +18,21 @@ namespace ApiMarvel.Controllers
         }
 
         [HttpGet("personagens")]
-        public ActionResult<IEnumerable<Categoria>> GetCategoriasPersonagens()
+        public async Task<ActionResult<IEnumerable<Categoria>>> GetCategoriasPersonagens()
         {
-            return _context.Categorias.Include(p => p.Personagens).ToList();
+            return await _context.Categorias.Include(p => p.Personagens).ToListAsync();
         }
 
         [HttpGet]
-        public ActionResult<IEnumerable<Categoria>> Get()
+        public async Task<ActionResult<IEnumerable<Categoria>>> Get()
         {
-            return _context.Categorias.AsNoTracking().ToList();
+            return  await _context.Categorias.AsNoTracking().ToListAsync();
         }
 
         [HttpGet("{id:int}", Name = "ObterCategoria")]
-        public ActionResult<Categoria> Get(int id)
+        public async Task<ActionResult<Categoria>> Get(int id)
         {
-            var categoria = _context.Categorias.FirstOrDefault(p => p.Id == id);
+            var categoria =  await _context.Categorias.FirstOrDefaultAsync(p => p.Id == id);
 
             if (categoria == null)
             {
@@ -42,13 +42,13 @@ namespace ApiMarvel.Controllers
         }
 
         [HttpPost]
-        public ActionResult Post(Categoria categoria)
+        public async Task<ActionResult> Post(Categoria categoria)
         {
             if (categoria is null)
                 return BadRequest();
 
-            _context.Categorias.Add(categoria);
-            _context.SaveChanges();
+            await _context.Categorias.AddAsync(categoria);
+            await _context.SaveChangesAsync();
 
             return new CreatedAtRouteResult("ObterCategoria",
                 new { id = categoria.Id }, categoria);
@@ -56,7 +56,7 @@ namespace ApiMarvel.Controllers
         }
 
         [HttpPut("{id:int}")]
-        public ActionResult Put(int id, Categoria categoria)
+        public async Task<ActionResult> Put(int id, Categoria categoria)
         {
             if(id != categoria.Id)
             {
@@ -64,14 +64,14 @@ namespace ApiMarvel.Controllers
             }
 
             _context.Update(categoria);
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
             return Ok(categoria);
         }
 
         [HttpDelete("{id:int}")]
-        public ActionResult Delete(int id)
+        public async Task<ActionResult> Delete(int id)
         {
-            var categoria = _context.Categorias.FirstOrDefault(c => c.Id == id);
+            var categoria = await _context.Categorias.FirstOrDefaultAsync(c => c.Id == id);
 
             if(categoria == null)
             {
@@ -79,7 +79,7 @@ namespace ApiMarvel.Controllers
             }
 
             _context.Categorias.Remove(categoria);
-            _context.SaveChanges();
+             await _context.SaveChangesAsync();
             return Ok("Categoria Excluida com sucesso");
         }
     }
