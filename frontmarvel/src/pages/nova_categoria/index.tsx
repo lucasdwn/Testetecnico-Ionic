@@ -81,7 +81,6 @@ export function NovaCategoria() {
                 </div>
                 <div>
                     <form onSubmit={onSubmit}>
-                        {status.type === 'success' ? <p style={{color: "#2B8FD7"}}>{status.mensagem}</p> : ""}
                         {status.type === 'error' ? <p style={{color: "red"}}>{status.mensagem}</p> : ""}
                         <div className="field">
                             <label htmlFor="nome">Nome da Categoria:</label>

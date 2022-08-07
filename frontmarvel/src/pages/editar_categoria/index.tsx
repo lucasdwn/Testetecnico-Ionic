@@ -1,6 +1,5 @@
 import { ChangeEvent, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { resolveTypeReferenceDirective } from "typescript";
 import api from "../../services/api";
 
 
