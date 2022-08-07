@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import api from "../../services/api";
 
 interface ICategorias{
@@ -6,9 +7,10 @@ interface ICategorias{
     nome: string;
 }
 
-export function Categorias() {
-    const [categorias, setCategorias] = useState<ICategorias[]>([])
+export function VisualizarCategorias() {
+    const navigate = useNavigate()
 
+    const [categorias, setCategorias] = useState<ICategorias[]>([])
 
     useEffect(() => {
         loadCategorias()
@@ -29,6 +31,14 @@ export function Categorias() {
             })
     }
 
+    function viewCategoria(id: number){
+        navigate(`/visualizar_categoria/${id}`)    
+    }
+
+    function editCategoria(id: number){
+        navigate(`/editar_categoria/${id}`)    
+    }
+
     return(
         <>
             <table>
@@ -44,6 +54,11 @@ export function Categorias() {
                             <tr key={categorias.id}>
                                 <td>{categorias.id}</td>
                                 <td>{categorias.nome}</td>
+                                <td>
+                                    <button onClick={() => editCategoria(categorias.id)}>Editar</button>
+                                    <button onClick={() => viewCategoria(categorias.id)}>Visualizar</button>
+                                    <button onClick={() => deleteCategoria(categorias.id)}>Deletar</button>
+                                </td>
                             </tr>
                         ))
                     }

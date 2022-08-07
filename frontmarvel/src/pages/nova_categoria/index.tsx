@@ -1,5 +1,5 @@
-import { on } from "process";
 import { ChangeEvent, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import * as yup from 'yup';
 import api from "../../services/api";
 
@@ -9,6 +9,9 @@ interface IForm{
 }
 
 export function NovaCategoria() {
+
+    const navigate = useNavigate()
+
     const [formState, setFormState] = useState<IForm>({
         nome: ""
     });
@@ -36,10 +39,8 @@ export function NovaCategoria() {
         if(saveForm){
             await api.post("Categoria", formState).
             then(() => {
-                setStatus({
-                    type: 'success',
-                    mensagem: 'Categoria foi cadastrada com sucesso!'
-                })
+                alert("Categoria foi criada com sucesso!")
+                navigate("/visualizar_categorias")
             }).catch((err) =>{
                 setStatus({
                     type: 'error',

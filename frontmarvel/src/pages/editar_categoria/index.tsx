@@ -1,15 +1,20 @@
-import { on } from "process";
-import { ChangeEvent, useState } from "react";
-import * as yup from 'yup';
+import { ChangeEvent, useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
+import { resolveTypeReferenceDirective } from "typescript";
 import api from "../../services/api";
 
 
 interface IForm{
+    id: number;
     nome: string;
 }
 
-export function NovaCategoria() {
+export function EditarCategoria() {
+    const navigate = useNavigate()
+    const { id } = useParams();
+
     const [formState, setFormState] = useState<IForm>({
+        id: 1,
         nome: ""
     });
 
@@ -17,6 +22,10 @@ export function NovaCategoria() {
         type: '',
         mensagem: ''
     })
+
+    useEffect(() => {
+        findCategoria(id)
+    }, [id])
 
     function updateForm(e: ChangeEvent<HTMLInputElement>){
         setFormState({
@@ -29,45 +38,30 @@ export function NovaCategoria() {
     async function onSubmit(e: ChangeEvent<HTMLFormElement>){
         e.preventDefault()
 
-        if(!(await validate())) return;
-
-        const saveForm = true
-
-        if(saveForm){
-            await api.post("Categoria", formState).
+        await api.put(`/Categoria/${id}`, formState).
             then(() => {
-                setStatus({
-                    type: 'success',
-                    mensagem: 'Categoria foi cadastrada com sucesso!'
-                })
-            }).catch((err) =>{
+                alert("Categoria foi atualizada com sucesso!")
+                navigate(`/visualizar_categorias`)
+            }).catch((error) =>{
                 setStatus({
                     type: 'error',
-                    mensagem: 'Erro: Categoria não foi cadastrada!'
+                    mensagem: 'Erro: Categoria não foi atualizada!'
                 })
+                
             })
-        }else{
-            setStatus({
-                type: 'error',
-                mensagem: 'Erro: Categoria não foi cadastrada!'
-            })
-        }
+        console.log(formState)
     }
 
-    async function validate(){
-        let schema = yup.object().shape({
-            nome: yup.string().required("Por Favor preencha o nome da categoria!")
-        }).required();
-        try{
-            await schema.validate(formState)
-            return true
-        }catch(error){
-            setStatus({
-                type: 'error',
-                mensagem: `${ error }`
-            });
-            return false;
-        }
+    async function findCategoria(id: string | undefined){
+        const response = await api.get(`Categoria/${id}`)
+        setFormState({
+            id: response.data.id,
+            nome: response.data.nome
+        })
+    }
+
+    function back() {
+        navigate('/visualizar_categorias')
     }
 
     return(
@@ -76,11 +70,11 @@ export function NovaCategoria() {
             <header></header>
             <main>
                 <div>
-                    <h1>Cadastrar nova categoria</h1>
+                    <h1>Editar categoria: {formState.nome}</h1>
+                    <button onClick={back}>Voltar</button>
                 </div>
                 <div>
                     <form onSubmit={onSubmit}>
-                        {status.type === 'success' ? <p style={{color: "#2B8FD7"}}>{status.mensagem}</p> : ""}
                         {status.type === 'error' ? <p style={{color: "red"}}>{status.mensagem}</p> : ""}
                         <div className="field">
                             <label htmlFor="nome">Nome da Categoria:</label>
@@ -92,7 +86,7 @@ export function NovaCategoria() {
                                 onChange={(e: ChangeEvent<HTMLInputElement>) => updateForm(e)} 
                             />
                         </div>
-                        <button type="submit">Cadastrar</button>
+                        <button type="submit">Salvar</button>
                     </form>
                 </div>
             </main>
