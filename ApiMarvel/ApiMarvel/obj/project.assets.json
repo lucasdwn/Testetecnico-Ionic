@@ -2066,11 +2066,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\ddaiw\\source\\repos\\ApiMarvel\\ApiMarvel\\ApiMarvel.csproj",
+      "projectUniqueName": "C:\\Users\\ddaiw\\Desktop\\TesteTecnico\\ApiMarvel\\ApiMarvel\\ApiMarvel.csproj",
       "projectName": "ApiMarvel",
-      "projectPath": "C:\\Users\\ddaiw\\source\\repos\\ApiMarvel\\ApiMarvel\\ApiMarvel.csproj",
+      "projectPath": "C:\\Users\\ddaiw\\Desktop\\TesteTecnico\\ApiMarvel\\ApiMarvel\\ApiMarvel.csproj",
       "packagesPath": "C:\\Users\\ddaiw\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\ddaiw\\source\\repos\\ApiMarvel\\ApiMarvel\\obj\\",
+      "outputPath": "C:\\Users\\ddaiw\\Desktop\\TesteTecnico\\ApiMarvel\\ApiMarvel\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\ddaiw\\AppData\\Roaming\\NuGet\\NuGet.Config",

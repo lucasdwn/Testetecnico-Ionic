@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "9EayXoRBzICttFh9NfifjP2i70qlU3IGh1AiOubqaADwPqD8HW7vZT4oyW+uyAxepaRhvZ1JmLvP6B91cQ1L1w==",
+  "dgSpecHash": "KaEQbxxAsmEpKXsRy1Wz/2LDitCSJILOFeqmdBf1wZWv9AKBQ85tBbgiVik3g/B1Csm80z9vn4X7TopRPqgUow==",
   "success": true,
-  "projectFilePath": "C:\\Users\\ddaiw\\source\\repos\\ApiMarvel\\ApiMarvel\\ApiMarvel.csproj",
+  "projectFilePath": "C:\\Users\\ddaiw\\Desktop\\TesteTecnico\\ApiMarvel\\ApiMarvel\\ApiMarvel.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\ddaiw\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Users\\ddaiw\\.nuget\\packages\\microsoft.csharp\\4.5.0\\microsoft.csharp.4.5.0.nupkg.sha512",

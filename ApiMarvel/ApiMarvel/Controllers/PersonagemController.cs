@@ -17,9 +17,9 @@ namespace ApiMarvel.Controllers
         }
 
         [HttpGet]
-        public ActionResult<IEnumerable<Personagem>> Get()
+        public  ActionResult<IEnumerable<Personagem>> Get()
         {
-            var personagens = _context.Personagens.ToList();
+            var personagens =  _context.Personagens.ToList();
 
             if(personagens is null)
                 return NotFound();
