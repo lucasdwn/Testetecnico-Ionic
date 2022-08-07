@@ -1,7 +1,7 @@
 ﻿using ApiMarvel.Data;
 using ApiMarvel.Models;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace ApiMarvel.Controllers
 {
@@ -17,9 +17,9 @@ namespace ApiMarvel.Controllers
         }
 
         [HttpGet]
-        public  ActionResult<IEnumerable<Personagem>> Get()
+        public  async Task<ActionResult<IEnumerable<Personagem>>> Get()
         {
-            var personagens =  _context.Personagens.ToList();
+            var personagens = await _context.Personagens.ToListAsync();
 
             if(personagens is null)
                 return NotFound();
@@ -28,9 +28,9 @@ namespace ApiMarvel.Controllers
         }
 
         [HttpGet("{id:int}", Name ="ObterPersonagem")]
-        public ActionResult<Personagem> Get(int id)
+        public async Task<ActionResult<Personagem>> Get(int id)
         {
-            var personagem = _context.Personagens.FirstOrDefault(p => p.Id == id);
+            var personagem = await _context.Personagens.FirstOrDefaultAsync(p => p.Id == id);
 
             if (personagem is null)
                 NotFound("Personagem não encontrado");
@@ -39,20 +39,20 @@ namespace ApiMarvel.Controllers
         }
 
         [HttpPost]
-        public ActionResult Post(Personagem personagem)
+        public async Task<ActionResult> Post(Personagem personagem)
         {
             if (personagem is null)
                 return BadRequest();
 
-            _context.Personagens.Add(personagem);
-            _context.SaveChanges();
+            await _context.Personagens.AddAsync(personagem);
+            await _context.SaveChangesAsync();
 
             return new CreatedAtRouteResult("ObterPersonagem",
                 new { id = personagem.Id }, personagem);
         }
 
         [HttpPut("{id:int}")]
-        public ActionResult Put(int id, Personagem personagem)
+        public async Task<ActionResult> Put(int id, Personagem personagem)
         {
             if(id != personagem.Id)
             {
@@ -60,20 +60,20 @@ namespace ApiMarvel.Controllers
             }
 
             _context.Update(personagem);
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
             return Ok(personagem);
         }
 
         [HttpDelete("{id:int}")]
-        public ActionResult Delete(int id)
+        public async Task<ActionResult> Delete(int id)
         {
-            var personagem = _context.Personagens.FirstOrDefault(p => p.Id == id);
+            var personagem =  await _context.Personagens.FirstOrDefaultAsync(p => p.Id == id);
 
             if (personagem is null)
                 return NotFound("Personagem não localizado");
 
             _context.Personagens.Remove(personagem);
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
 
             return Ok("Personagem Excluido com sucesso");
         }
