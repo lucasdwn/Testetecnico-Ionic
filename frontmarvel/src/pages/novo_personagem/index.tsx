@@ -145,7 +145,6 @@ export function NovoPersonagem() {
                                 name="categoriaId" 
                                 id="categoriaId" 
                                 value={formState.categoriaId}
-                                defaultValue="Selecione uma categoria"
                                 onChange={(e:ChangeEvent<HTMLSelectElement>) => updateForm(e)}
                             >
                                 {

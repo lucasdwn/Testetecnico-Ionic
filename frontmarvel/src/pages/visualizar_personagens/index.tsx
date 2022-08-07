@@ -36,12 +36,12 @@ export default function VisualizarPersonagens() {
     };
 
     function editPersonagem(id: number){
-        navigate(`editar_personagem/${id}`)
+        navigate(`/editar_personagem/${id}`)
     }
 
     
     function viewPersonagem(id: number){
-        navigate(`visualizar_personagem/${id}`)
+        navigate(`/visualizar_personagem/${id}`)
     }
 
     return(

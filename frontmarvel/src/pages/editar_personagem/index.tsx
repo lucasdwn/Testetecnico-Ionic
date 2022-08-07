@@ -3,6 +3,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import api from "../../services/api";
 
 interface IForm {
+    id: number;
     nome: string;
     imagem: string;
     descrição: string;
@@ -20,6 +21,7 @@ export function EditarPersonagem() {
     const { id } = useParams();
      
     const [formState, setFormState] = useState<IForm>({
+        id: 0,
         nome: "",
         imagem: "",
         descrição: "",
@@ -57,7 +59,7 @@ export function EditarPersonagem() {
 
     async function onSubmit(e:ChangeEvent<HTMLFormElement>){
         e.preventDefault()
-        await api.put("/Personagem", formState)
+        await api.put(`Personagem/${id}`, formState)
             .then(() => {
                 alert("Personagem editado com sucesso!")
                 navigate("/visualizar_personagens")
@@ -72,6 +74,7 @@ export function EditarPersonagem() {
     async function findProduto(id: string | undefined){
         const response = await api.get(`Personagem/${id}`)
         setFormState({
+            id: response.data.id,
             nome: response.data.nome,
             imagem: response.data.imagem,
             descrição: response.data.descrição,
@@ -128,7 +131,6 @@ export function EditarPersonagem() {
                                 name="categoriaId" 
                                 id="categoriaId" 
                                 value={formState.categoriaId}
-                                defaultValue="Selecione uma categoria"
                                 onChange={(e:ChangeEvent<HTMLSelectElement>) => updateForm(e)}
                             >
                                 {
