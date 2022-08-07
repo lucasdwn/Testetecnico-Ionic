@@ -3,13 +3,15 @@ import {
     Route, 
     Routes,
 } from "react-router-dom";
-import { Categorias } from "../pages/categorias";
+import { NovaCategoria } from "../pages/nova_categoria";
+import { Categorias } from "../pages/visualizar_categorias";
 
 export function AppRoutes() {
     return(
         <Router>
             <Routes>
                 <Route path="/" element={<Categorias/>}/>
+                <Route path="/nova_categoria" element={<NovaCategoria/>}/>
             </Routes>
         </Router>
     )
