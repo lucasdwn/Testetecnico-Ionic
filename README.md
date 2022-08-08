@@ -1,10 +1,12 @@
 # Teste Técnico - IonicHealth
 ## Desafio
  Escolher um filme e usar como tema para desenvolver uma aplicação CRUD em C# utilizando o .NET CORE e o ANGULAR/REACT.
-
+ 
 ## Funcionalidades
 • CRUD de Categorias<br>
 • CRUD de Personagens<br>
+
+https://user-images.githubusercontent.com/68930336/183335731-eb1470aa-fc92-4db9-bceb-0c9f4f9b1d46.mp4
 
 ## Configurar a string de conexão
     1º Vá em: /ApiMarvel/ApiMarvel/appsetings.json
