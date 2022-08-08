@@ -1,6 +1,8 @@
 import { ChangeEvent, useEffect, useState } from "react";
+import { Button } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import * as yup from 'yup';
+import NavGlobal from "../../components/nav_global";
 import api from "../../services/api";
 
 interface IForm {
@@ -96,21 +98,26 @@ export function NovoPersonagem() {
         }
     };
 
+    function back() {
+        navigate("/visualizar_personagens")
+    }
+
     return (
         <>
         <section>
             <header>
-
+                <NavGlobal/>
             </header>
             <main>
-                <div>
+                <div className="title">
                     <h1>Novo Personagem</h1>
+                    <Button variant="light" onClick={back}>Voltar</Button>{' '}
                 </div>
-                <div>
+                <div className="form">
                     <form onSubmit={onSubmit}>
                         {status.type === 'error' ? <p style={{color: "red"}}>{status.mensagem}</p> : ""}
                         <div className="field">
-                            <label htmlFor="nome">Nome do personagem:</label>
+                            <label htmlFor="nome">Nome</label>
                             <input 
                                 type="text"
                                 id="personagem"
@@ -120,7 +127,7 @@ export function NovoPersonagem() {
                             />
                         </div>
                         <div className="field">
-                            <label htmlFor="imagem">imagem do personagem:</label>
+                            <label htmlFor="imagem">Link da imagem</label>
                             <input 
                                 type="text"
                                 id="personagem"
@@ -130,7 +137,7 @@ export function NovoPersonagem() {
                             />
                         </div>
                         <div className="field">
-                            <label htmlFor="descrição">Descrição do personagem:</label>
+                            <label htmlFor="descrição">Descrição</label>
                             <input 
                                 type="text"
                                 id="personagem"
@@ -140,13 +147,14 @@ export function NovoPersonagem() {
                             />
                         </div>
                         <div className="field">
-                            <label htmlFor="categoria">Categoria do personagem</label>
+                            <label htmlFor="categoria">Categoria</label>
                             <select 
                                 name="categoriaId" 
                                 id="categoriaId" 
                                 value={formState.categoriaId}
                                 onChange={(e:ChangeEvent<HTMLSelectElement>) => updateForm(e)}
                             >
+                                <option>selecione uma categoria</option>
                                 {
                                     categoria && categoria.map(categoria => (
                                         <option value={categoria.id} key={categoria.id}>{categoria.nome}</option>
@@ -154,7 +162,7 @@ export function NovoPersonagem() {
                                 }
                             </select>
                         </div>
-                        <button type="submit">Cadastrar</button>
+                        <Button variant="danger" type="submit">Cadastrar</Button>{' '}
                     </form>
                 </div>
             </main>

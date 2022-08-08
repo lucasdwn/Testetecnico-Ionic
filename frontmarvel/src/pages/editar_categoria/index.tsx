@@ -1,5 +1,7 @@
 import { ChangeEvent, useEffect, useState } from "react";
+import { Button } from "react-bootstrap";
 import { useNavigate, useParams } from "react-router-dom";
+import NavGlobal from "../../components/nav_global";
 import api from "../../services/api";
 
 
@@ -66,11 +68,13 @@ export function EditarCategoria() {
     return(
         <>
         <section>
-            <header></header>
+            <header>
+                <NavGlobal/>
+            </header>
             <main>
-                <div>
+                <div className="title">
                     <h1>Editar categoria: {formState.nome}</h1>
-                    <button onClick={back}>Voltar</button>
+                    <Button variant="light" onClick={back}>Voltar</Button>{' '}
                 </div>
                 <div>
                     <form onSubmit={onSubmit}>
@@ -85,7 +89,7 @@ export function EditarCategoria() {
                                 onChange={(e: ChangeEvent<HTMLInputElement>) => updateForm(e)} 
                             />
                         </div>
-                        <button type="submit">Salvar</button>
+                        <Button variant="danger" type="submit">Salvar</Button>{' '}
                     </form>
                 </div>
             </main>

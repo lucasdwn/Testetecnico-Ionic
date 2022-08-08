@@ -1,6 +1,9 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import NavGlobal from "../../components/nav_global";
 import api from "../../services/api";
+import Button from 'react-bootstrap/Button';
+import Table from 'react-bootstrap/Table';
 
 interface ICategorias{
     id: number;
@@ -38,32 +41,49 @@ export function VisualizarCategorias() {
     function editCategoria(id: number){
         navigate(`/editar_categoria/${id}`)    
     }
+    
+    function newCategoria(){
+        navigate("/nova_categoria")
+    }
 
     return(
         <>
-            <table>
-                <thead>
-                    <tr>
-                        <th>id</th>
-                        <th>nome</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {
-                        categorias && categorias.map(categorias => (
-                            <tr key={categorias.id}>
-                                <td>{categorias.id}</td>
-                                <td>{categorias.nome}</td>
-                                <td>
-                                    <button onClick={() => editCategoria(categorias.id)}>Editar</button>
-                                    <button onClick={() => viewCategoria(categorias.id)}>Visualizar</button>
-                                    <button onClick={() => deleteCategoria(categorias.id)}>Deletar</button>
-                                </td>
+        <section>
+            <header>
+                <NavGlobal/>
+            </header>
+            <main>
+                <div className="title">
+                    <h1>Visualizar Categorias</h1>
+                    <Button variant="danger" onClick={newCategoria}>Nova categoria</Button>{' '}
+                </div>
+                <div className="table">
+                    <Table striped bordered hover variant="dark">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>NOME</th>
+                                <th>AÇÕES</th>
                             </tr>
-                        ))
-                    }
-                </tbody>
-            </table>
+                        </thead>
+                        <tbody>
+                            {
+                                categorias && categorias.map(categorias => (
+                                    <tr key={categorias.id}>
+                                        <td>{categorias.id}</td>
+                                        <td>{categorias.nome}</td>
+                                        <td>
+                                            <Button variant="danger" onClick={() => editCategoria(categorias.id)}>Editar</Button>{' '}
+                                            <Button variant="danger" onClick={() => viewCategoria(categorias.id)}>Visualizar</Button>{' '}
+                                            <Button variant="danger" onClick={() => deleteCategoria(categorias.id)}>Deletar</Button>{' '}
+                                        </td>
+                                    </tr>
+                                ))}
+                        </tbody>
+                    </Table>
+                </div>
+            </main>
+        </section>
         </>
     )
 

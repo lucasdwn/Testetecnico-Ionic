@@ -1,6 +1,8 @@
 import { ChangeEvent, useState } from "react";
+import { Button } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import * as yup from 'yup';
+import NavGlobal from "../../components/nav_global";
 import api from "../../services/api";
 
 
@@ -27,6 +29,11 @@ export function NovaCategoria() {
             [e.target.name]:
             e.target.value
         })
+    }
+
+
+    function back() {
+        navigate('/visualizar_categorias')
     }
 
     async function onSubmit(e: ChangeEvent<HTMLFormElement>){
@@ -74,16 +81,19 @@ export function NovaCategoria() {
     return(
         <>
         <section>
-            <header></header>
+            <header>
+                <NavGlobal/>
+            </header>
             <main>
-                <div>
+                <div className="title">
                     <h1>Cadastrar nova categoria</h1>
+                    <Button variant="light" onClick={back}>Voltar</Button>{' '}
                 </div>
-                <div>
+                <div className="form">
                     <form onSubmit={onSubmit}>
                         {status.type === 'error' ? <p style={{color: "red"}}>{status.mensagem}</p> : ""}
                         <div className="field">
-                            <label htmlFor="nome">Nome da Categoria:</label>
+                            <label htmlFor="nome">Nome da Categoria</label>
                             <input 
                                 type="text"
                                 id="categoria"
@@ -92,7 +102,7 @@ export function NovaCategoria() {
                                 onChange={(e: ChangeEvent<HTMLInputElement>) => updateForm(e)} 
                             />
                         </div>
-                        <button type="submit">Cadastrar</button>
+                        <Button variant="danger" type="submit">Cadastrar</Button>{' '}
                     </form>
                 </div>
             </main>

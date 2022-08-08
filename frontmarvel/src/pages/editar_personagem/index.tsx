@@ -1,5 +1,7 @@
 import { ChangeEvent, useEffect, useState } from "react";
+import { Button } from "react-bootstrap";
 import { useNavigate, useParams } from "react-router-dom";
+import NavGlobal from "../../components/nav_global";
 import api from "../../services/api";
 
 interface IForm {
@@ -80,17 +82,22 @@ export function EditarPersonagem() {
             descrição: response.data.descrição,
             categoriaId: response.data.categoriaId
         })
+    };
+    
+    function back(){
+        navigate('/visualizar_personagens')
     }
 
     return (
         <>
         <section>
             <header>
-
+                <NavGlobal/>
             </header>
             <main>
                 <div>
                     <h1>Editar Personagem : {formState.nome}</h1>
+                    <Button variant="light" onClick={back}>voltar</Button>{' '}
                 </div>
                 <div>
                     <form onSubmit={onSubmit}>
@@ -140,7 +147,7 @@ export function EditarPersonagem() {
                                 }
                             </select>
                         </div>
-                        <button type="submit">Salvar</button>
+                        <Button variant="danger" type="submit">Salvar</Button>{' '}
                     </form>
                 </div>
             </main>
