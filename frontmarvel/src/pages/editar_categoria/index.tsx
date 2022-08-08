@@ -39,21 +39,19 @@ export function EditarCategoria() {
     async function onSubmit(e: ChangeEvent<HTMLFormElement>){
         e.preventDefault()
 
-        await api.put(`/Categoria/${id}`, formState).
-            then(() => {
+        await api.put(`/Categoria/${id}`, formState)
+            .then(() => {
                 alert("Categoria foi atualizada com sucesso!")
                 navigate(`/visualizar_categorias`)
             }).catch((error) =>{
                 setStatus({
                     type: 'error',
                     mensagem: 'Erro: Categoria não foi atualizada!'
-                })
-                
+                }) 
             })
-        console.log(formState)
-    }
+    };
 
-    async function findCategoria(id: string | undefined){
+    async function findCategoria(id: string | undefined): Promise<void>{
         const response = await api.get(`Categoria/${id}`)
         setFormState({
             id: response.data.id,

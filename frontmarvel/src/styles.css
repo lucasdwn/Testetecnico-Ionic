@@ -9,6 +9,7 @@ h2,
 table,
 label{
     color: #F0F0F0;
+    text-align: center;
 }
 
 img{
@@ -34,8 +35,8 @@ main{
     flex-direction: column;
     width: 300px;
     gap: 25px;
-    
 }
+
 
 .title{
     display: flex;
@@ -92,4 +93,14 @@ select:focus{
 
 form Button{
     margin-top: 30px;
+}
+
+@media (max-width: 768px){
+    .buttons{
+        width: 80vw;
+    }
+
+    input{
+        width: 80vw;
+    }
 }
